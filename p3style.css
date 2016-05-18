@@ -2,6 +2,10 @@
   		fill: #aaa;
 }
 
+text {
+   font-family:"LinotypeUniversW01-Cn";
+}
+
 #state-borders {
 	fill: none;
 	stroke: #fff;
@@ -11,12 +15,77 @@
   pointer-events: none;
 }
 
+#leftPart {
+  width: 700px;
+  height: 500px;
+  /*float: left;*/
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 70px;
+}
+
+#rightPart {
+  width: 400px;
+  margin: 0 0 10px 50px;
+  display: inline-block;
+  vertical-align: top;
+  /*float: right;*/
+  padding-top: 0px;
+  height: 500px;
+  margin-bottom: 70px;
+}
+
+#mapLegendDiv {
+  width: 330px;
+  height: 45px;
+  position: relative;
+  left: 0px;
+  top:0px;
+  bottom: 0px;
+}
+
+#stateDetail {
+  top: 100px;
+  width: 1200px;
+  display: inline-block;
+}
+
+#zipperTitle{  
+  /*display:inline-block;*/
+  vertical-align: top;
+  float: right;
+  height:100px;
+  width:400px;
+}
+
+#zipper{  
+  /*display:inline-block;*/
+  vertical-align: top;
+  float: right;
+  height:200px;
+  width:400px;
+}
+
+#lineChart {
+  /*margin-top: 50px;*/
+  float: left;
+  vertical-align: top;
+  /*display:inline-block;*/
+  /*width: 500px;*/
+  /*margin-left: 100px;*/
+}
+
+#lineSvg{
+  width: 500px;
+}
+
+
 input[type="range"] {
 	-webkit- 
-  margin-top: 2px;
+  margin-top: 0px;
   background-color: #eaedf7;
   border-radius: 15px;
-  width: 750px;
+  width: 650px;
   -webkit-appearance: none;
   height:10px;
 }
@@ -32,45 +101,63 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .sliderTag { 
-  width: 35px;
+  width: 62px;
   margin: 5px 0 0 0;
   float: left;
   color: #7986CB; 
-  margin-right: 1px;
+  margin-right: 0px;
   font-weight: bold; 
-  font-family:"LinotypeUniversW01-Cn";
 }
 
-.tile {
-  pointer-events: none;
-  position: absolute;
-  width: 256px;
-  height: 256px;
+.myLine{
+  fill:none;
 }
 
-.info {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+.axis path { 
+  fill: none; 
+  stroke: GAINSBORO;
 }
 
-.zipper{  
-    display:block;
-    height:200px;
-    width:300px;
+.rightAxis path { 
+  fill: none; 
+  stroke: #00BCD4;
+}
+
+.rightAxis text {
+  fill: #00BCD4;
+}
+
+.rightAxis line {
+  stroke: #00BCD4;
+}
+.axis line { 
+  stroke: GAINSBORO; 
+}
+
+.axis text {
+  fill: DARKGRAY;
+}
+
+
+
+.x.axis line {
+  stroke: lightgrey;
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+
+.Alcohol{
+  margin-right: 40px;
 }
 
 .Alcohol,.Speeding{
-   display:inline-block; 
-    text-align:center;
-}
-
-text {
-  font-family: "RamaGothicM-Heavy",Impact,Haettenschweiler,"Franklin Gothic Bold",Charcoal,"Helvetica Inserat","Bitstream Vera Sans Bold","Arial Black",sans-serif;
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 16rem;
-  fill: #1072b8;
+  display:inline-block; 
+  vertical-align: top;
+  text-align:center;
 }
 
 #donut,#donut1 {
@@ -85,3 +172,16 @@ path.color0 {
 path.color1 {
   fill: #35526b;
 }
+
+.histText {
+  font-size: 15px;
+  font-color: MIDNIGHTBLUE;
+}
+
+.legendText{
+  font-size: 13px;
+}
+
+
+
+
