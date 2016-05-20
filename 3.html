@@ -146,7 +146,7 @@
 
 	var g = svg.append("g");
 
-	d3.json("/data/us.json", function(error, us) {
+	d3.json("./data/us.json", function(error, us) {
 		if (error) throw error;
 
 		var fatalRateScale = d3.scale.linear()
@@ -168,7 +168,7 @@
 	    .attr("d", path);
 
 	    //Set default map color
-	    d3.csv("/data/data.csv", function (error, data){
+	    d3.csv("./data/data.csv", function (error, data){
 	    	if (error) {console.log(error);}
 	   	 	d3.selectAll(".stateUnits")
 	    	.data(topojson.feature(us, us.objects.states).features)
@@ -186,7 +186,7 @@
 
 		// Set default histogram of 2004
 		var fatalArr = [];
-		d3.csv("/data/data.csv", function (error, data2){
+		d3.csv("./data/data.csv", function (error, data2){
 			if (error) {console.log(error);}				
 			//get all fatal values from this year and pick the top 10 of them
 			data2.forEach(function(p){
@@ -206,9 +206,10 @@
 	    d3.selectAll("input").on("change", function change() {
 			year = this.value;
 			console.log(year);
+			fatalArr=[];
 			var paint;
 			// change the fill of map 
-			d3.csv("/data/data.csv", function (error, data){
+			d3.csv("./data/data.csv", function (error, data){
 				if (error) {console.log(error);}
 				d3.selectAll(".stateUnits")
 				.data(topojson.feature(us, us.objects.states).features)
@@ -221,6 +222,16 @@
 			    	return paint;
 				})
 				.style("opacity", 1);
+				
+				data.forEach(function(p){
+					if(p["State"]!="USA"){
+						fatalArr.push({"State":p["State"],"FatalRate":p["fatalRate"+year]});
+					}
+				});
+				top10 = fatalArr.sort(function(a, b) { return a.FatalRate < b.FatalRate ? 1 : -1; })
+				.slice(0, 10);
+				d3.selectAll(".hissvg").remove();
+				plotHistogram("#histogram",top10);
 			})
 			// document.getElementById("yearSpan").innerHTML = year;
 		});
@@ -244,7 +255,7 @@
 				var opc;
 				var stateName;
 				clickCount = 0;
-				d3.csv("/data/data.csv", function (error, data){
+				d3.csv("./data/data.csv", function (error, data){
 					if (error) {console.log(error);}
 					d3.selectAll(".stateUnits")
 					.data(topojson.feature(us, us.objects.states).features)
@@ -264,7 +275,7 @@
 				// $("#lineChart").show();
 				drawline(clickedId);
 				//donut charts change with slider
-				d3.csv("/data/alcohol_speeding.csv", function (error, data2){
+				d3.csv("./data/alcohol_speeding.csv", function (error, data2){
 					if (error) {console.log(error);}
 					// var selected = d3.select(this);
 					data2.forEach(function (d){
@@ -305,7 +316,7 @@
 		var targetState=[];
 		var usaAve = [];
 
-		d3.csv("/data/data.csv",  function(error, data) {
+		d3.csv("./data/data.csv",  function(error, data) {
 			if (error) {console.log(error);}
 			data.forEach(function (d){
 				if (d["ID"]== 9999){
@@ -479,6 +490,7 @@
 		var valueArr = [];
 		var rateArr = [];
 		var counter = 0;
+		
 		inputarray.forEach(function(d){
 			rateArr.push(parseFloat(d.FatalRate));
 			valueArr.push({"y": counter,
@@ -487,7 +499,7 @@
 			counter++;
 		});
 		var numofbins=10;
-		console.log(valueArr);
+
 		//todo
 		//change the width and height
 		var svg=d3.select(eid).append("svg")
