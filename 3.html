@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<!DOCTYPE html>
 <html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>P3</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 	<link type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/c1ece602-4b8f-4767-a71f-aa828be38869.css">	
 	<link rel="stylesheet" type="text/css" href="p3style.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -22,53 +24,66 @@
 </head>
 
 <body>
-	<div id="leftPart">
-		<div id="mapDiv"> 
-			<svg id="map"></svg>
+	<h1> Which State Has The Worst Drivers? </h1>
+	<p> ------description goes here------ </p> 
+	<form class="fixed">
+		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
+	</form>
+	<div class="row">
+		<div class="col-md-8 center" >
+			<h2> USA Map <span id="yearSpan1">2004</span></h2>
+			<div id="mapDiv"> 
+				<svg id="map"></svg>
+			</div>
+			<div id="mapLegendDiv">
+				<svg id="legendSvg"></svg>
+			</div>
+		
+			<div id="timeSlider">
+				<input id="slider" type="range" min="2004" max="2014" value="2004" step="1" />
+					<div id="sliderText">
+						<div class="sliderTag">2004</div>
+						<div class="sliderTag">2005</div>
+						<div class="sliderTag">2006</div>
+						<div class="sliderTag">2007</div>
+						<div class="sliderTag">2008</div>
+						<div class="sliderTag">2009</div>
+						<div class="sliderTag">2010</div>
+						<div class="sliderTag">2011</div>
+						<div class="sliderTag">2012</div>
+						<div class="sliderTag">2013</div>
+						<div class="sliderTag" style="width: 40px">2014</div>
+					</div>			
+			</div>
 		</div>
-		<div id="mapLegendDiv">
-			<svg id="legendSvg"></svg>
-		</div>
-	
-		<div id="timeSlider">
-			<input id="slider" type="range" min="2004" max="2014" value="2004" step="1" />
-				<div id="sliderText">
-					<div class="sliderTag">2004</div>
-					<div class="sliderTag">2005</div>
-					<div class="sliderTag">2006</div>
-					<div class="sliderTag">2007</div>
-					<div class="sliderTag">2008</div>
-					<div class="sliderTag">2009</div>
-					<div class="sliderTag">2010</div>
-					<div class="sliderTag">2011</div>
-					<div class="sliderTag">2012</div>
-					<div class="sliderTag">2013</div>
-					<div class="sliderTag" style="width: 40px">2014</div>
-				</div>			
-		</div>
-	</div>
-
-	<div id="rightPart">
-		<h3> Top 10 States .... in <span id="yearSpan">2004</span></h3>
+		<div class="col-md-4"  >
+			<h2> Top 10 States .... in <span id="yearSpan2">2004</span></h2>
 		<div id="histogram"></div>
-	</div><br>
+	</div>
+	</div>
+	
 
-	<div id="stateDetail"> 
-		<h3 id="lineTitle"></h3>
-		<div id="lineChart">
-			<div id="lineSvg"></div>
+	<div id="stateDetail" class="row"> 
+		<div class="col-md-8">
+			<h2 id="lineTitle"></h2>
+			<div id="lineChart">
+				<div id="lineSvg"></div>
+			</div>
+			<div id="lineLegend"></div>
 		</div>
-		<div id="lineLegend"></div>
-		<div id="zipperTitle">In <span id="zipperYear"></span>:</div>
-		<div id="zipper">
-	    	<div class="Alcohol">
-	       		<div class="title_text">Alcohol</div>
-				<div id="donut"></div>
-	    	</div>
-	    	<div class="Speeding">
-	        	<div class="title_text">Speeding</div>
-				<div id="donut1"></div>
-	   		</div>
+		<div class="col-md-4">		
+			<div id="zipperTitle">
+				<h2> In <span id="zipperYear">2004</span>: </h2></div>
+			<div id="zipper">
+		    	<div class="Alcohol">
+		       		<div class="title_text">Alcohol</div>
+					<div id="donut"></div>
+		    	</div>
+		    	<div class="Speeding">
+		        	<div class="title_text">Speeding</div>
+					<div id="donut1"></div>
+		   		</div>
+			</div>
 		</div>
 	</div>
 
@@ -85,8 +100,10 @@
 	$("#stateDetail").hide();
 
 	// Append the legend for the map
+	// inspired by the link https://color.adobe.com/explore/newest/
 	// var colorSet = ["#FFD54F", "#FFEE58", "#9CCC65", "#4DD0E1", "#7986CB"];
-	var colorSet = ["#FFEE58", "#8BC34A", "#00BCD4", "#3F51B5", "#E91E63"];
+	// var colorSet = ["#FFEE58", "#8BC34A", "#00BCD4", "#3F51B5", "#E91E63"];
+	var colorSet = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"]
 	var legendSvg = d3.select("#legendSvg")
 	.attr("width", 320)
 	.attr("height",40);
@@ -122,8 +139,8 @@
 	/* set up the map*/
 	// var width = $("#mapDiv").width(),
 	// var width = $("#mapDiv").width(),
-	var width = 750,
-	    height = 470,
+	var width = 800,
+	    height = 500,
 	    hiswidth = 400,
 		hisheight = 400,
 		hispadding1 = 100,
@@ -206,6 +223,9 @@
 	    d3.selectAll("input").on("change", function change() {
 			year = this.value;
 			console.log(year);
+			document.getElementById("yearSpan1").innerHTML = year;
+			document.getElementById("yearSpan2").innerHTML = year;
+			document.getElementById("zipperYear").innerHTML = year;
 			fatalArr=[];
 			var paint;
 			// change the fill of map 
@@ -233,7 +253,7 @@
 				d3.selectAll(".hissvg").remove();
 				plotHistogram("#histogram",top10);
 			})
-			// document.getElementById("yearSpan").innerHTML = year;
+			
 		});
 
 		function clicked(d) {
@@ -503,8 +523,9 @@
 		//todo
 		//change the width and height
 		var svg=d3.select(eid).append("svg")
-		.attr("class","hissvg")
-		.attr("width",hiswidth).attr("height",hisheight);
+		.attr("class", "hissvg")
+		.attr("width", hiswidth)
+		.attr("height", hisheight);
 		
 		var yScale = d3.scale.linear()
 		.domain([10,0])
@@ -549,3 +570,4 @@
 
 </script>
 </body>
+</html>

@@ -1,3 +1,48 @@
+/*- Style by Jon Perez -*/
+h1 {
+    color: #d04764;
+    font-family: 'Lobster', cursive;
+    font-size: 48px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 36px;
+    text-shadow: 1px 0 0 #fff;
+    text-align: center;
+}
+
+h2 {
+    color: #2CA4B0;
+    font-family: 'Oleo Script', cursive;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 32px;
+    margin: 20px;
+    padding-left: 20px;
+    text-shadow: 1px 0 0 #fff;
+    
+}
+p {
+    color: #333;
+    font-family: 'Original Surfer', cursive;
+    font-size: 16px;
+    line-height: 28px;
+    margin: 0 0 24px;
+}
+a {
+    color: #d04764;
+    font-family: 'Original Surfer', cursive;
+}
+a:hover {
+    text-decoration: underline
+}
+
+body {
+  /*background-color: #FFFEEF;*/
+}
+/*--*/
+.center{
+  text-align: center;
+}
 #states {
   		fill: #aaa;
 }
@@ -15,25 +60,7 @@ text {
   pointer-events: none;
 }
 
-#leftPart {
-  width: 700px;
-  height: 500px;
-  /*float: left;*/
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 70px;
-}
 
-#rightPart {
-  width: 400px;
-  margin: 0 0 10px 50px;
-  display: inline-block;
-  vertical-align: top;
-  /*float: right;*/
-  padding-top: 0px;
-  height: 500px;
-  margin-bottom: 70px;
-}
 
 #mapLegendDiv {
   width: 330px;
@@ -46,16 +73,17 @@ text {
 
 #stateDetail {
   top: 100px;
-  width: 1200px;
-  display: inline-block;
+  /*width: 1200px;*/
+  /*display: inline-block;*/
+  padding-top: 50px;
 }
 
 #zipperTitle{  
   /*display:inline-block;*/
   vertical-align: top;
   float: right;
-  height:100px;
-  width:400px;
+  height: 100px;
+  width: 400px;
 }
 
 #zipper{  
@@ -77,6 +105,7 @@ text {
 
 #lineSvg{
   width: 500px;
+  margin: auto;
 }
 
 
@@ -138,8 +167,6 @@ input[type="range"]::-webkit-slider-thumb {
   fill: DARKGRAY;
 }
 
-
-
 .x.axis line {
   stroke: lightgrey;
   stroke-opacity: .5;
@@ -148,7 +175,6 @@ input[type="range"]::-webkit-slider-thumb {
 .x.axis path {
   display: none;
 }
-
 
 .Alcohol{
   margin-right: 40px;
@@ -181,7 +207,34 @@ path.color1 {
 .legendText{
   font-size: 13px;
 }
+.hissvg {
+  padding: 50px;
+}
 
+.fixed {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+}
 
+.topButton {
+  -webkit-border-radius: 100;
+  -moz-border-radius: 100;
+  border-radius: 100px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  background: #002F2F;
+  padding: 10px;
+  bottom: 100px;
+  right: 100px;
+}
 
+.topButton:hover {
+  background: #79BD8F;
+  text-decoration: none;
+}
 
