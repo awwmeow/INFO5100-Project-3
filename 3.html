@@ -27,9 +27,9 @@
 	<p class="center"> ------description goes here------ </br></p> 
 	<form class="fixed">
 		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
-	</form>
+	</form>									
 	<div class="row">
-		<div class="col-md-7 center" >
+		<div class="col-md-8 center" >
 			<h2> USA Map <span id="yearSpan1">2004</span></h2>
 			<div id="mapDiv"> 
 				<svg id="map"></svg>
@@ -38,38 +38,40 @@
 				<svg id="legendSvg"></svg>
 			</div>
 		
-			<div id="timeSlider">
+			<div id="timeSlider" class="center">
 				<input id="slider" type="range" min="2004" max="2014" value="2004" step="1" />
-					<div id="sliderText">
-						<div class="sliderTag">2004</div>
-						<div class="sliderTag">2005</div>
-						<div class="sliderTag">2006</div>
-						<div class="sliderTag">2007</div>
-						<div class="sliderTag">2008</div>
-						<div class="sliderTag">2009</div>
-						<div class="sliderTag">2010</div>
-						<div class="sliderTag">2011</div>
-						<div class="sliderTag">2012</div>
-						<div class="sliderTag">2013</div>
-						<div class="sliderTag" style="width: 40px">2014</div>
-					</div>			
+				<div id="sliderText">
+					<div class="sliderTag">2004</div>
+					<div class="sliderTag">2005</div>
+					<div class="sliderTag">2006</div>
+					<div class="sliderTag">2007</div>
+					<div class="sliderTag">2008</div>
+					<div class="sliderTag">2009</div>
+					<div class="sliderTag">2010</div>
+					<div class="sliderTag">2011</div>
+					<div class="sliderTag">2012</div>
+					<div class="sliderTag">2013</div>
+					<div class="sliderTag" style="width: 50px">2014</div>
+				</div>			
 			</div>
 		</div>
-		<div class="col-md-5"  >
+
+		<div class="col-md-4"  >
 			<h2> Top 10 States .... in <span id="yearSpan2">2004</span></h2>
-		<div id="histogram"></div>
-	</div>
+			<div id="histogram"></div>
+		</div>
 	</div>
 
 	<div id="stateDetail" class="row"> 
-		<div class="col-md-8">
+		<div class="col-md-8 center">
 			<h2 id="lineTitle"></h2>
 			<div id="lineChart">
 				<div id="lineSvg"></div>
 			</div>
 			<div id="lineLegend"></div>
 		</div>
-		<div class="col-md-4">		
+
+		<div class="col-md-4 center">		
 			<div id="zipperTitle">
 				<h2> In <span id="zipperYear">2004</span>: </h2></div>
 			<div id="zipper">
@@ -86,7 +88,6 @@
 	</div>
 
 	<script type="text/javascript">
-
 	// Scroll animation
 	var scrollToElement = function(el, ms){
 	    var speed = (ms) ? ms : 600;
@@ -96,7 +97,6 @@
 	}
 
 	$("#stateDetail").hide();
-
 	// Append the legend for the map
 	// inspired by the link https://color.adobe.com/explore/newest/
 	// var colorSet = ["#FFD54F", "#FFEE58", "#9CCC65", "#4DD0E1", "#7986CB"];
@@ -161,6 +161,7 @@
 
 	var g = svg.append("g");
 
+	// us map
 	d3.json("./data/us.json", function(error, us) {
 		if (error) throw error;
 
@@ -214,18 +215,17 @@
 			d3.selectAll(".hissvg").remove();
 			plotHistogram("#histogram",top10);
 		});
-
-
-	    	   
+	   
 	    // Color Change as slider and generate text
 	    d3.selectAll("input").on("change", function change() {
 			year = this.value;
-			console.log(year);
+			// console.log(year);
 			document.getElementById("yearSpan1").innerHTML = year;
 			document.getElementById("yearSpan2").innerHTML = year;
 			document.getElementById("zipperYear").innerHTML = year;
 			fatalArr=[];
 			var paint;
+			
 			// change the fill of map 
 			d3.csv("./data/data.csv", function (error, data){
 				if (error) {console.log(error);}
@@ -355,7 +355,7 @@
 			})
 
 			var xScale = d3.scale.ordinal()
-			.domain([2004,2005,2006,2007,2008,2009,2010,2011, 2012,2013,2014])
+			.domain([2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014])
 			.rangePoints([padding+10, width - padding-10]);
 
 			var yScale = d3.scale.linear()
@@ -529,8 +529,8 @@
 		.domain([10,0])
 		.range([hisheight - hispadding2, hispadding2]);
 		
-		var xScale=d3.scale.linear()
-		.domain([d3.min(rateArr)*0.8,d3.max(rateArr)])
+		var xScale = d3.scale.linear()
+		.domain([d3.min(rateArr) * 0.8, d3.max(rateArr)])
 		.range([hispadding1, hiswidth - hispadding2]);
 		
 		var xAxis=d3.svg.axis().scale(xScale).orient("top")
@@ -539,29 +539,28 @@
 		.ticks(0);
 		
 		svg.append("g").attr("class","axis").call(xAxis)
-		.attr("transform","translate(0,"+(hispadding2)+")");
+		.attr("transform"," translate(0," + (hispadding2) + ")");
 		// svg.append("g").attr("class","axis").call(yAxis)
 		// .attr("transform","translate("+hispadding1+",0)");
 		
 		rankColor = ["#880E4F","#AD1457","#C2185B","#D81B60","#E91E63","#EC407A","#F06292","#F48FB1","#F8BBD0","#FCE4EC"];
 
-		var i=0;
+		var i = 0;
 		valueArr.forEach(function (bin) {
 			svg.append("rect").attr("class", "bar")
-			.attr("x", xScale(d3.min(rateArr)*0.8))
-			.attr("y", yScale(bin.y)*1.1)
-			.attr("width", xScale(bin.x)-xScale(d3.min(rateArr)*0.8))
-			.attr("height", (hisheight-2*hispadding2)/numofbins-4)
+			.attr("x", xScale(d3.min(rateArr) * 0.8))
+			.attr("y", yScale(bin.y) * 1.1)
+			.attr("width", xScale(bin.x) - xScale(d3.min(rateArr) * 0.8))
+			.attr("height", (hisheight - 2 * hispadding2) / numofbins - 4)
 			.style("fill", rankColor[i])
-			.attr("opacity",1);
+			.attr("opacity", 1);
 
 			svg.append("text").text(bin.State)
-			.attr("class","histText")
-			.attr("x", xScale(d3.min(rateArr)*0.8)-10)
-			.attr("y", yScale(bin.y)*1.1+22)
-			.attr("text-anchor","end");
-			i++;
-			
+			.attr("class", "histText")
+			.attr("x", xScale(d3.min(rateArr) * 0.8) - 10)
+			.attr("y", yScale(bin.y) * 1.1 + 22)
+			.attr("text-anchor", "end");
+			i++;	
 		});
 	}
 
