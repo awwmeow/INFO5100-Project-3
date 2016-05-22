@@ -385,7 +385,7 @@
 			linesvg.append("g").attr("class","rightAxis")
 			.attr("transform","translate(" + (width-padding)+ ",0)")
 			.call(yAxis2);
-;
+			
 			// Draw the usa average line
 			var fatalLine = d3.svg.line()
 			.interpolate("cardinal")
@@ -517,7 +517,7 @@
 			counter++;
 		});
 		var numofbins=10;
-
+		
 		//todo
 		//change the width and height
 		var svg=d3.select(eid).append("svg")
