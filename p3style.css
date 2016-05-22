@@ -81,7 +81,8 @@ text {
 #zipperTitle{  
   /*display:inline-block;*/
   vertical-align: top;
-  float: right;
+  /*float: right;*/
+  padding: 0 20px 20px 0;
   height: 100px;
   width: 400px;
 }
@@ -89,7 +90,8 @@ text {
 #zipper{  
   /*display:inline-block;*/
   vertical-align: top;
-  float: right;
+  /*float: right;*/
+  padding: 20px;
   height:200px;
   width:400px;
 }
@@ -188,8 +190,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 #donut,#donut1 {
 margin: 0 auto;
-display:inline-block;  
-}
+/*display:inline-block;  
+*/}
 
 path.color0 {
   fill: #1072b8;

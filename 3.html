@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>P3</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -24,13 +23,13 @@
 </head>
 
 <body>
-	<h1> Which State Has The Worst Drivers? </h1>
-	<p> ------description goes here------ </p> 
+	<h1> Which State Has the Worst Drivers? </h1>
+	<p class="center"> ------description goes here------ </br></p> 
 	<form class="fixed">
 		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
 	</form>
 	<div class="row">
-		<div class="col-md-8 center" >
+		<div class="col-md-7 center" >
 			<h2> USA Map <span id="yearSpan1">2004</span></h2>
 			<div id="mapDiv"> 
 				<svg id="map"></svg>
@@ -56,12 +55,11 @@
 					</div>			
 			</div>
 		</div>
-		<div class="col-md-4"  >
+		<div class="col-md-5"  >
 			<h2> Top 10 States .... in <span id="yearSpan2">2004</span></h2>
 		<div id="histogram"></div>
 	</div>
 	</div>
-	
 
 	<div id="stateDetail" class="row"> 
 		<div class="col-md-8">
@@ -142,8 +140,8 @@
 	var width = 800,
 	    height = 500,
 	    hiswidth = 400,
-		hisheight = 400,
-		hispadding1 = 100,
+		hisheight = 450,
+		hispadding1 = 50,
 		hispadding2 = 30,
 	    centered;
 	var count = 0;
@@ -533,7 +531,7 @@
 		
 		var xScale=d3.scale.linear()
 		.domain([d3.min(rateArr)*0.8,d3.max(rateArr)])
-		.range([hispadding1,hiswidth-hispadding2]);
+		.range([hispadding1, hiswidth - hispadding2]);
 		
 		var xAxis=d3.svg.axis().scale(xScale).orient("top")
 		.ticks(5).tickSize(3);
