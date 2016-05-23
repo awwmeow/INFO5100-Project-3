@@ -20,14 +20,16 @@
 
 	<!-- Latest compiled and minified JavaScript -
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+
 </head>
 
 <body onload="sizeChange()">
 	<h1> Which State Has the Worst Drivers? </h1>
 	<p class="center"> ------description goes here------ </br></p> 
-	<form class="fixed">
+
+	<!-- <form class="fixed">
 		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
-	</form>		
+	</form>	 -->	
 
 	<div class="row">
 		<div class="col-md-8 center" >
@@ -35,7 +37,6 @@
 			<div id="map"> 
 				<svg id="container"></svg>
 			</div>
-
 			<div id="mapLegendDiv">
 				<svg id="legendSvg"></svg>
 			</div>
@@ -59,7 +60,7 @@
 		</br>
 		</div>
 
-		<div class="col-md-4"  >
+		<div class="col-md-4 no-wrap">
 			<h2> Top 10 States .... in <span id="yearSpan2">2004</span></h2>
 			<div id="histogram"></div>
 		</div>
@@ -71,7 +72,7 @@
 			<div id="lineChart">
 				<div id="lineSvg"></div>
 			</div>
-			<div id="lineLegend"></div>
+			<div id="lineLegend"> </div>
 		</div>
 
 		<div class="col-md-4 center">		
@@ -107,7 +108,7 @@
 	var colorSet = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"]
 	var legendSvg = d3.select("#legendSvg")
 	.attr("width", 320)
-	.attr("height",40);
+	.attr("height", 40);
 
 	// Append the Map Legend 
 	legendSvg.append("rect")
@@ -126,6 +127,7 @@
 	.attr("x",260).attr("y",25).attr("width",59).attr("height",10)
 	.style("stroke","none").style("fill", colorSet[4]);	
 	legendSvg.selectAll("text").remove();
+
 	legendSvg.append("text")
 	.text("0.4").attr("class","legendText").attr("x",28).attr("y",22).attr("font-size","30%").style("fill","gray");
 	legendSvg.append("text")
@@ -152,24 +154,9 @@
 	var clickCount = 0;
 	var clickedId;
 
-	// sizeChange
-	d3.select(window)
-    	.on("resize", sizeChange);
-
-
-    // ++++++++++++++++++++++++++++++++
-    // onload function
-	function sizeChange() {
-	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
-	    $("svg").height($("#container").width()*0.618);
-	}
-	// ++++++++++++++++++++++++++++++++
-
-
 	var projection = d3.geo.albersUsa()
-		    .scale(1000)
-		    .translate([width / 2, height / 2]);
-		 // .scale(width)
+		.scale(1000)
+		.translate([width / 2, height / 2]);
 
 	var path = d3.geo.path()
 		.projection(projection);
@@ -177,11 +164,16 @@
 	var svg = d3.select("#container")
 		.attr("width", "100%");
 
-	// var svg = d3.select("#style")
-	//     .attr("width", width)
-	//     .attr("height", height);
-
 	var g = svg.append("g");
+
+	// sizeChange
+	d3.select(window)
+    	.on("resize", sizeChange);
+    // onload function
+	function sizeChange() {
+	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
+	    $("svg").height($("#container").width()*0.618);
+	}
 
 	// us map
 	d3.json("./data/us.json", function(error, us) {
@@ -205,7 +197,6 @@
 	    .attr("id", "state-borders")	    
 	    .attr("d", path);
 
-
 	    //Set default map color
 	    d3.csv("./data/data.csv", function (error, data){
 	    	if (error) {console.log(error);}
@@ -223,9 +214,6 @@
 			.style("opacity", 1);
 		});
 
-
-	   
-
 		// Set default histogram of 2004
 		var fatalArr = [];
 		d3.csv("./data/data.csv", function (error, data2){
@@ -233,13 +221,16 @@
 			//get all fatal values from this year and pick the top 10 of them
 			data2.forEach(function(p){
 				if(p["State"]!="USA"){
-					fatalArr.push({"State":p["State"],"FatalRate":p["fatalRate2004"]});
+					fatalArr.push({"State":p["State"], 
+						"FatalRate":p["fatalRate2004"]});
 				}
 			});
-			top10 = fatalArr.sort(function(a, b) { return a.FatalRate < b.FatalRate ? 1 : -1; })
+			top10 = fatalArr.sort(function(a, b) { 
+				return a.FatalRate < b.FatalRate ? 1 : -1; 
+			})
 			.slice(0, 10);
 			d3.selectAll(".hissvg").remove();
-			plotHistogram("#histogram",top10);
+			plotHistogram("#histogram", top10);
 		});
 	   
 	    // Color Change as slider and generate text
@@ -546,7 +537,7 @@
 
 		//todo
 		//change the width and height
-		var svg=d3.select(eid).append("svg")
+		var svg = d3.select(eid).append("svg")
 		.attr("class", "hissvg")
 		.attr("width", hiswidth)
 		.attr("height", hisheight);
