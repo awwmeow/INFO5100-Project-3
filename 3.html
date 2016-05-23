@@ -192,7 +192,7 @@
     // onload function
 	function sizeChange() {
 	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
-	    $("svg").height($("#container").width()*0.618);
+	    $("#container").height($("#container").width()*0.618);
 	    // d3.select("#lineChart").attr("height", "100%");
 	}
 
@@ -258,8 +258,8 @@
 	    var $range = $("#range");
 	    $range.on("change", function change() {
 			year = this.value;
-			// alert(year);
-			// console.log(year);
+			//alert(year);
+			//console.log(year);
 			document.getElementById("yearSpan1").innerHTML = year;
 			document.getElementById("yearSpan2").innerHTML = year;
 			document.getElementById("zipperYear").innerHTML = year;
@@ -340,13 +340,13 @@
 						// console.log(d);
 						if(d["ID"]==clickedId){
 							var alcoholPerc = parseInt(d[year+"AL"]);
+							
 							var totalFatal = parseInt(d["FT"+year]);
-							// console.log(d["State"]);
-							// console.log(d["FT"+year]);
-							// console.log(d);
+							console.log(year);
+							console.log(d["FT"+year]);
+							console.log(d);
 							var speedFatal = parseInt(d["SF"+year]);
 							var speedingPerc = (speedFatal/totalFatal)*100;
-							d3.selectAll(".donutsvg").remove();
 							drawDonutChart('#donut',alcoholPerc,120,120,".35em");
 							drawDonutChart('#donut1',speedingPerc,120,120,".35em");
 						}
