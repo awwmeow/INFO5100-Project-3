@@ -22,23 +22,25 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 </head>
 
-<body>
+<body onload="sizeChange()">
 	<h1> Which State Has the Worst Drivers? </h1>
 	<p class="center"> ------description goes here------ </br></p> 
 	<form class="fixed">
 		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
-	</form>									
+	</form>		
+
 	<div class="row">
 		<div class="col-md-8 center" >
-			<h2> USA Map <span id="yearSpan1">2004</span></h2>
-			<div id="mapDiv"> 
-				<svg id="map"></svg>
+			<h2> USA Map <span id="yearSpan1"> 2004 </span></h2>
+			<div id="map"> 
+				<svg id="container"></svg>
 			</div>
+
 			<div id="mapLegendDiv">
 				<svg id="legendSvg"></svg>
 			</div>
-		
-			<div id="timeSlider" class="center">
+
+			<div id="timeSlider">
 				<input id="slider" type="range" min="2004" max="2014" value="2004" step="1" />
 				<div id="sliderText">
 					<div class="sliderTag">2004</div>
@@ -51,9 +53,10 @@
 					<div class="sliderTag">2011</div>
 					<div class="sliderTag">2012</div>
 					<div class="sliderTag">2013</div>
-					<div class="sliderTag" style="width: 50px">2014</div>
+					<div class="sliderTag" style="width: 40px">2014</div>
 				</div>			
 			</div>
+		</br>
 		</div>
 
 		<div class="col-md-4"  >
@@ -137,9 +140,10 @@
 	/* set up the map*/
 	// var width = $("#mapDiv").width(),
 	// var width = $("#mapDiv").width(),
+
 	var width = 800,
-	    height = 500,
-	    hiswidth = 400,
+	    height = 500;
+	var hiswidth = 400,
 		hisheight = 450,
 		hispadding1 = 50,
 		hispadding2 = 30,
@@ -148,23 +152,41 @@
 	var clickCount = 0;
 	var clickedId;
 
+	// sizeChange
+	d3.select(window)
+    	.on("resize", sizeChange);
+
+
+    // ++++++++++++++++++++++++++++++++
+    // onload function
+	function sizeChange() {
+	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
+	    $("svg").height($("#container").width()*0.618);
+	}
+	// ++++++++++++++++++++++++++++++++
+
+
 	var projection = d3.geo.albersUsa()
-	.scale(1000)
-    .translate([width / 2, height / 2]);
+		    .scale(1000)
+		    .translate([width / 2, height / 2]);
+		 // .scale(width)
 
 	var path = d3.geo.path()
-	    .projection(projection);
+		.projection(projection);
 
-	var svg = d3.select("#map")
-	    .attr("width", width)
-	    .attr("height", height);
+	var svg = d3.select("#container")
+		.attr("width", "100%");
+
+	// var svg = d3.select("#style")
+	//     .attr("width", width)
+	//     .attr("height", height);
 
 	var g = svg.append("g");
 
 	// us map
 	d3.json("./data/us.json", function(error, us) {
 		if (error) throw error;
-
+		
 		var fatalRateScale = d3.scale.linear()
 		.domain([0.4, 1, 1.5, 2, 2.5])
 		.range(colorSet);
@@ -183,6 +205,7 @@
 	    .attr("id", "state-borders")	    
 	    .attr("d", path);
 
+
 	    //Set default map color
 	    d3.csv("./data/data.csv", function (error, data){
 	    	if (error) {console.log(error);}
@@ -199,6 +222,9 @@
 			})
 			.style("opacity", 1);
 		});
+
+
+	   
 
 		// Set default histogram of 2004
 		var fatalArr = [];
@@ -385,7 +411,7 @@
 			linesvg.append("g").attr("class","rightAxis")
 			.attr("transform","translate(" + (width-padding)+ ",0)")
 			.call(yAxis2);
-			
+
 			// Draw the usa average line
 			var fatalLine = d3.svg.line()
 			.interpolate("cardinal")
@@ -517,7 +543,7 @@
 			counter++;
 		});
 		var numofbins=10;
-		
+
 		//todo
 		//change the width and height
 		var svg=d3.select(eid).append("svg")
