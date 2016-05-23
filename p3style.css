@@ -1,50 +1,48 @@
 /*- Style by Jon Perez -*/
 h1 {
-    color: #d04764;
-    font-family: 'Lobster', cursive;
-    font-size: 48px;
-    font-weight: normal;
-    line-height: 48px;
-    margin: 36px;
-    text-shadow: 1px 0 0 #fff;
-    text-align: center;
+  color: #d04764;
+  font-family: 'Lobster', cursive;
+  font-size: 48px;
+  font-weight: normal;
+  line-height: 48px;
+  margin: 36px;
+  text-shadow: 1px 0 0 #fff;
+  text-align: center;
 }
 
 h2 {
-    color: #2CA4B0;
-    font-family: 'Oleo Script', cursive;
-    font-size: 30px;
-    font-weight: normal;
-    line-height: 32px;
-    margin: 20px;
-    padding-left: 20px;
-    text-shadow: 1px 0 0 #fff;
-    
+  color: #2CA4B0;
+  font-family: 'Oleo Script', cursive;
+  font-size: 30px;
+  font-weight: normal;
+  line-height: 32px;
+  margin: 20px;
+  padding-left: 20px;
+  text-shadow: 1px 0 0 #fff;
 }
+
+.no-wrap {
+  white-space: nowrap;
+}
+
 p {
-    color: #333;
-    font-family: 'Original Surfer', cursive;
-    font-size: 16px;
-    line-height: 28px;
-    margin: 0 0 24px;
-}
-a {
-    color: #d04764;
-    font-family: 'Original Surfer', cursive;
-}
-a:hover {
-    text-decoration: underline
+  color: #333;
+  font-family: 'Original Surfer', cursive;
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0 0 24px;
 }
 
 body {
-  /*background-color: #FFFEEF;*/
+  background-color: #FAF9F5;
 }
-/*--*/
+
 .center{
   text-align: center;
 }
+
 #states {
-  		fill: #aaa;
+  fill: #aaa;
 }
 
 text {
@@ -63,7 +61,6 @@ text {
 #mapLegendDiv {
   width: 330px;
   height: 45px;
-  position: relative;
   left: 0px;
   top:0px;
   bottom: 0px;
@@ -71,43 +68,32 @@ text {
 
 #stateDetail {
   top: 100px;
-  /*width: 1200px;*/
-  /*display: inline-block;*/
   padding-top: 50px;
 }
 
 #zipperTitle{  
-  /*display:inline-block;*/
   vertical-align: top;
-  /*float: right;*/
   padding: 0 20px 20px 0;
   height: 100px;
   width: 400px;
 }
 
 #zipper{  
-  /*display:inline-block;*/
   vertical-align: top;
-  /*float: right;*/
   padding: 20px;
   height:200px;
   width:400px;
 }
 
 #lineChart {
-  /*margin-top: 50px;*/
   float: left;
   vertical-align: top;
-  /*display:inline-block;*/
-  /*width: 500px;*/
-  /*margin-left: 100px;*/
 }
 
 #lineSvg{
   width: 500px;
   margin: auto;
 }
-
 
 input[type="range"] {
 	-webkit- 
@@ -127,12 +113,12 @@ input[type="range"]::-webkit-slider-thumb {
   width: 30px;
   background: none repeat scroll 0 0 #7986CB;
   border-radius: 5px;
-  margin-left: 8px;
+  margin-left: 15px;
 }
 
 .sliderTag { 
   width: 62px;
-  margin: 5px 0 0 0;
+  margin: 5px 0 20px 0;
   float: left;
   color: #7986CB; 
   margin-right: 0px;
@@ -188,9 +174,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #donut,#donut1 {
-margin: 0 auto;
-/*display:inline-block;  
-*/}
+  margin: 0 auto;
+}
 
 path.color0 {
   fill: #1072b8;
@@ -208,10 +193,13 @@ path.color1 {
 .legendText{
   font-size: 13px;
 }
+
 .hissvg {
   padding-left: 50px;
 }
 
+/* -for the top button- */
+/*
 .fixed {
     position: fixed;
     bottom: 50px;
@@ -220,6 +208,7 @@ path.color1 {
     height: 20px;
     margin: auto;
 }
+
 
 .topButton {
   -webkit-border-radius: 100;
@@ -237,5 +226,16 @@ path.color1 {
 .topButton:hover {
   background: #79BD8F;
   text-decoration: none;
+}
+*/
+
+#container {
+  margin:2%;
+  padding:20px;
+}
+
+#legendSvg {
+  z-index: -1;
+  position: relative;
 }
 
