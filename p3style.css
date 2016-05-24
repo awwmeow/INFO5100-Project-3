@@ -16,9 +16,10 @@ h2 {
   font-size: 30px;
   font-weight: normal;
   line-height: 32px;
-  margin: 20px;
-  padding-left: 20px;
+  /*margin: 20px;*/
+  /*padding-left: 20px;*/
   text-shadow: 1px 0 0 #fff;
+  text-align: center;
 }
 
 .no-wrap {
@@ -78,16 +79,18 @@ text {
 
 #zipperTitle{  
   vertical-align: top;
-  padding: 0 20px 20px 0;
+  padding: 50px 0 50px 0;
   height: 100px;
   width: 400px;
+  margin: auto;
 }
 
 #zipper{  
   vertical-align: top;
-  padding: 20px;
-  height:200px;
-  width:400px;
+  padding: 50px 0 50px 0px;
+  height: 200px;
+  width: 400px;
+  margin: 0 auto;
 }
 
 #lineChart {
@@ -174,7 +177,10 @@ input[type="range"]::-webkit-slider-thumb {
   fill: DARKGRAY;
 }
 .Alcohol{
-  margin-right: 40px;
+  margin: 0 40px;
+}
+.Speeding{
+  margin-left:30px;
 }
 
 .Alcohol,.Speeding{
@@ -184,6 +190,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #donut,#donut1 {
+  display: inline-block;
   margin: 0 auto;
 }
 
@@ -208,37 +215,6 @@ path.color1 {
   padding-left: 50px;
 }
 
-/* -for the top button- */
-/*
-.fixed {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    width: 20px;
-    height: 20px;
-    margin: auto;
-}
-
-
-.topButton {
-  -webkit-border-radius: 100;
-  -moz-border-radius: 100;
-  border-radius: 100px;
-  font-family: Georgia;
-  color: #ffffff;
-  font-size: 20px;
-  background: #002F2F;
-  padding: 10px;
-  bottom: 100px;
-  right: 100px;
-}
-
-.topButton:hover {
-  background: #79BD8F;
-  text-decoration: none;
-}
-*/
-
 #container {
   margin:2%;
   padding:20px;
@@ -255,4 +231,8 @@ path.color1 {
   height: 50px;
   display:inline-block; 
   /*background-color: red;*/
+}
+
+#histogram {
+  padding-top: 60px;
 }

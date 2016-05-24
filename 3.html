@@ -16,16 +16,11 @@
     <link rel="stylesheet" href="ion.rangeSlider.skinFlat.css" />
     <script src="jquery-1.12.3.min.js"></script>
 	<script src="ion.rangeSlider.js"></script>
-	
 </head>
 
 <body onload="sizeChange()">
 	<h1> Which State Has the Worst Drivers? </h1>
 	<p class="center"> ------description goes here------ </br></p> 
-
-	<!-- <form class="fixed">
-		<input type="button" class="topButton" onClick="history.go(0)" value="TOP">
-	</form>	 -->	
 
 	<div class="row">
 		<div class="col-md-8 center" >
@@ -36,52 +31,33 @@
 			<div id="mapLegendDiv">
 				<svg id="legendSvg"></svg>
 			</div>
-			<!-- <div>
-				 <input type="text" id="range" value="" name="range" />
-			</div> -->
+			
 			<div id="timeSlider">
 				<div>
 				 <input type="text" id="range" value="" name="range" />
-			</div>
-				<!-- <input id="slider" type="range" min="2004" max="2014" value="2004" step="1" />
-				<div id="sliderText">
-					<div class="sliderTag">2004</div>
-					<div class="sliderTag">2005</div>
-					<div class="sliderTag">2006</div>
-					<div class="sliderTag">2007</div>
-					<div class="sliderTag">2008</div>
-					<div class="sliderTag">2009</div>
-					<div class="sliderTag">2010</div>
-					<div class="sliderTag">2011</div>
-					<div class="sliderTag">2012</div>
-					<div class="sliderTag">2013</div>
-					<div class="sliderTag" style="width: 40px">2014</div>
-				</div>			 -->
+				</div>
 			</div>
 		</br>
 		</div>
 
 		<div class="col-md-4 no-wrap">
-			<h2> Top 10 States .... in <span id="yearSpan2">2004</span></h2>
-			<div id="histogram"></div>
+			<h2 > Top 10 States .... in <span id="yearSpan2">2004</span></h2>
+			<div id="histogram" class="center"></div>
 		</div>
 	</div>
 
 	<div id="stateDetail" class="row"> 
-		<div class="col-md-8 center">
-
-			<h2 id="lineTitle"></h2>
-			<div id="lineLegend"> </div>
-			<div id="lineChart">
+		<div  id ="lineWrapper" class="col-md-8 ">
+			<h2 id="lineTitle" class="center" ></h2>
+			<div id="lineLegend" ></div>
+			<div id="lineChart" >
 				<div id="lineSvg"></div>
-			</div>
-			
+			</div>	
 		</div>
 
-		<div class="col-md-4 center">		
-			<div id="zipperTitle">
-				<h2> In <span id="zipperYear">2004</span>: </h2></div>
-			<div id="zipper">
+		<div class="col-md-4 ">		
+			<h2 > In <span id="zipperYear">2004</span>: </h2>
+			<div id="zipper" >
 		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
 					<div id="stateALdonut"></div>
@@ -91,25 +67,22 @@
 					<div id="stateSPdonut"></div>
 		   		</div>
 			</div>
-		</div>
-		
-		<div class="col-md-4 center">
-		<div id="zipper2">
-		    	<div class="NationAlcohol">
+			
+			<div id="zipper2">
+		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
 					<div id="nationALdonut"></div>
 		    	</div>
-		    	<div class="NationSpeeding">
+		    	<div class="Speeding">
 		        	<div class="title_text">Speeding</div>
 					<div id="nationSPdonut"></div>
 		   		</div>
 		</div>
 		</div>
+		
 	</div>
 <script>
-
     $(function () {
-
         $("#range").ionRangeSlider({
             hide_min_max: false,
             keyboard: true,
@@ -120,10 +93,9 @@
             grid: false,
             prettify_separator: ""
         });
-
     });
 </script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	// Scroll animation
 	var scrollToElement = function(el, ms){
 	    var speed = (ms) ? ms : 600;
@@ -136,7 +108,6 @@
 	// Append the legend for the map
 	// inspired by the link https://color.adobe.com/explore/newest/
 	// var colorSet = ["#FFD54F", "#FFEE58", "#9CCC65", "#4DD0E1", "#7986CB"];
-	// var colorSet = ["#FFEE58", "#8BC34A", "#00BCD4", "#3F51B5", "#E91E63"];
 	var colorSet = ["#FF6138", "#FFFF9D", "#BEEB9F", "#79BD8F", "#00A388"]
 	var legendSvg = d3.select("#legendSvg")
 	.attr("width", 320)
@@ -189,14 +160,12 @@
 	var projection = d3.geo.albersUsa()
 		.scale(1000)
 		.translate([width / 2, height / 2]);
-
 	var path = d3.geo.path()
 		.projection(projection);
 
 	var svg = d3.select("#container")
 		.attr("width", "100%")
 		.attr("height",height);
-
 	var g = svg.append("g");
 
 	// sizeChange
@@ -307,7 +276,6 @@
 		});
 		
 		function clicked(d) {
-			
 			//var year = $("#timeSlider").val();
 			$("#stateDetail").show();
 			// if click a state
@@ -377,16 +345,16 @@
 		$("#lineLegend").empty();
 		d3.selectAll(".lineCheckBox").style("opacity", "1");		
 		var height = 300;
-		var width = $ ("#stateDetail").width()*0.6;
+		var width = $ ("#lineWrapper").width();
 		var padding = 0.06*width;
 		var linesvg = d3.select("#lineSvg").append("svg")
 		.attr("height", height).attr("width", width);
-
+		$("#lineWrapper").height(400);
 		var legendsvg = d3.select("#lineLegend").append("svg")
 		.attr("height", 50).attr("width", width);
 
-		var radius = 0.015*width;
-		var circleText = ["US Average Fatal Rate", "State Fatal Rate", "State Murder Rate", "State Education Rate"];
+		var radius = 0.01*width;
+		var circleText = ["US Average Fatal Rate", "State Fatal Rate", "State Murder Rate", "State unemployment Rate"];
 		var lineColors = ["#FFCA28","#FF6F00",  "#7986CB", "#3949AB"];
 
 		for (var i=0; i<4; i++){
@@ -395,9 +363,6 @@
 			legendsvg.append("text").text(circleText[i])
 			.attr("x",0.1*width+i*0.2*width+15).attr("y",0.1*height+5);
 		}
-		
-			// console.log(10*(i+1));
-
 
 		 // Add the clip path.
 	  	linesvg.append("clipPath")
@@ -405,8 +370,6 @@
 	    .append("rect")
 	    .attr("width", width)
 	    .attr("height", height);
-
-	    
 
 		var targetState=[];
 		var usaAve = [];
@@ -637,8 +600,6 @@
 			i++;	
 		});
 	}
-
-
 </script>
 </body>
 </html>
