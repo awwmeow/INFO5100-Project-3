@@ -256,10 +256,10 @@
 	   
 	    // Color Change as slider and generate text
 	    var $range = $("#range");
+		var year = 2004;
 	    $range.on("change", function change() {
 			year = this.value;
 			//alert(year);
-			//console.log(year);
 			document.getElementById("yearSpan1").innerHTML = year;
 			document.getElementById("yearSpan2").innerHTML = year;
 			document.getElementById("zipperYear").innerHTML = year;
@@ -291,14 +291,15 @@
 				d3.selectAll(".hissvg").remove();
 				plotHistogram("#histogram",top10);
 			})
-			
 		});
-
+		
 		function clicked(d) {
-			var year = $("#slider").val();
+			
+			//var year = $("#timeSlider").val();
 			$("#stateDetail").show();
 			// if click a state
-			// console.log(d && centered);
+			//var $range = $("#range");
+			//console.log($range.value);
 			if (d && centered !== d) {
 			   	centered = d;
 			   	clickedId = d.id;
@@ -332,26 +333,24 @@
 				});
 				// $("#lineChart").show();
 				drawline(clickedId);
-				//donut charts change with slider
+				
 				d3.csv("./data/alcohol_speedings.csv", function (error, data2){
 					if (error) {console.log(error);}
 					// var selected = d3.select(this);
 					data2.forEach(function (d){
-						// console.log(d);
+						//console.log(d);
 						if(d["ID"]==clickedId){
 							var alcoholPerc = parseInt(d[year+"AL"]);
-							
 							var totalFatal = parseInt(d["FT"+year]);
-							console.log(year);
-							console.log(d["FT"+year]);
-							console.log(d);
 							var speedFatal = parseInt(d["SF"+year]);
 							var speedingPerc = (speedFatal/totalFatal)*100;
-							drawDonutChart('#donut',alcoholPerc,120,120,".35em");
-							drawDonutChart('#donut1',speedingPerc,120,120,".35em");
+							d3.selectAll(".donutsvg").remove();
+							drawDonut('#donut',alcoholPerc,120,120,".35em");
+							drawDonut('#donut1',speedingPerc,120,120,".35em");
 						}
 				 	})
 				});
+				
 				scrollToElement("#stateDetail", 600);	
 			}
 		}
@@ -501,15 +500,15 @@
 	var duration   = 1000,
     transition = 200;
 
-	function drawDonutChart(element, percent, width, height, text_y) {
+	function drawDonut(element, percent, width, height, y_offset) {
 
 	  width = typeof width !== 'undefined' ? width : 290;
 	  height = typeof height !== 'undefined' ? height : 290;
-	  text_y = typeof text_y !== 'undefined' ? text_y : "-.10em";
+	  y_offset = typeof y_offset !== 'undefined' ? y_offset : "-.10em";
 
 	  var dataset = {
-			lower: calcPercent(0),
-			upper: calcPercent(percent)
+			lower: getPerc(0),
+			upper: getPerc(percent)
 		  },
 		  radius = Math.min(width, height) / 2,
 		  pie = d3.layout.pie().sort(null),
@@ -531,11 +530,11 @@
 			.enter().append("path")
 			.attr("class", function(d, i) { return "color" + i })
 			.attr("d", arc)
-			.each(function(d) { this._current = d; }); // store the initial values
+			.each(function(d) { this._current = d; }); 
 
 	  var text = donutsvg.append("text")
 			.attr("text-anchor", "middle")
-			.attr("dy", text_y);
+			.attr("dy", y_offset);
 
 	  if (typeof(percent) === "string") {
 		text.text(percent);
@@ -546,9 +545,6 @@
 		  clearTimeout(timeout);
 		  path = path.data(pie(dataset.upper)); // update the data
 		  path.transition().duration(duration).attrTween("d", function (a) {
-			// Store the displayed angles in _current.
-			// Then, interpolate from _current to the new angles.
-			// During the transition, _current is updated in-place by d3.interpolate.
 			var i  = d3.interpolate(this._current, a);
 			var i2 = d3.interpolate(progress, percent)
 			this._current = i(0);
@@ -556,12 +552,12 @@
 			  text.text( format(i2(t) / 100) );
 			  return arc(i(t));
 			};
-		  }); // redraw the arcs
+		  }); 
 		}, 200);
 	  }
 	};
 
-	function calcPercent(percent) {
+	function getPerc(percent) {
 	  return [percent, 100-percent];
 	};
 	
