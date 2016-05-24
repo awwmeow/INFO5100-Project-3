@@ -84,13 +84,26 @@
 			<div id="zipper">
 		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
-					<div id="donut"></div>
+					<div id="stateALdonut"></div>
 		    	</div>
 		    	<div class="Speeding">
 		        	<div class="title_text">Speeding</div>
-					<div id="donut1"></div>
+					<div id="stateSPdonut"></div>
 		   		</div>
 			</div>
+		</div>
+		
+		<div class="col-md-4 center">
+		<div id="zipper2">
+		    	<div class="NationAlcohol">
+		       		<div class="title_text">Alcohol</div>
+					<div id="nationALdonut"></div>
+		    	</div>
+		    	<div class="NationSpeeding">
+		        	<div class="title_text">Speeding</div>
+					<div id="nationSPdonut"></div>
+		   		</div>
+		</div>
 		</div>
 	</div>
 <script>
@@ -345,8 +358,10 @@
 							var speedFatal = parseInt(d["SF"+year]);
 							var speedingPerc = (speedFatal/totalFatal)*100;
 							d3.selectAll(".donutsvg").remove();
-							drawDonut('#donut',alcoholPerc,120,120,".35em");
-							drawDonut('#donut1',speedingPerc,120,120,".35em");
+							drawDonut('#stateALdonut',alcoholPerc,120,120,".35em");
+							drawDonut('#stateSPdonut',speedingPerc,120,120,".35em");
+							drawDonut('#nationALdonut',alcoholPerc,120,120,".35em");
+							drawDonut('#nationSPdonut',speedingPerc,120,120,".35em");
 						}
 				 	})
 				});
