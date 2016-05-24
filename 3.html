@@ -48,7 +48,7 @@
 
 	<div id="stateDetail" class="row"> 
 		<div  id ="lineWrapper" class="col-md-8 ">
-			<h2 id="lineTitle" class="center" ></h2>
+			<h2 id="lineTitle2" class="center" ></h2>
 			<div id="lineLegend" ></div>
 			<div id="lineChart" >
 				<div id="lineSvg"></div>
@@ -56,7 +56,7 @@
 		</div>
 
 		<div class="col-md-4 ">		
-			<h2 > In <span id="zipperYear">2004</span>: </h2>
+			<h2 ><span id="lineTitle" class="center"></span> in <span id="zipperYear">2004</span>: </h2>
 			<div id="zipper" >
 		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
@@ -68,6 +68,7 @@
 		   		</div>
 			</div>
 			
+			<h2>USA in <span id="zipperYear">2004</span>:</h2>
 			<div id="zipper2">
 		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
@@ -306,6 +307,7 @@
 					    	} 
 					    	if (d["ID"] == p.id && p.id == clickedId) {
 					    		document.getElementById("lineTitle").innerHTML = d.State;
+								document.getElementById("lineTitle2").innerHTML = d.State;
 						    	opc =  1;
 					    	}   		
 					    })
@@ -325,11 +327,20 @@
 							var totalFatal = parseInt(d["FT"+year]);
 							var speedFatal = parseInt(d["SF"+year]);
 							var speedingPerc = (speedFatal/totalFatal)*100;
+							
 							d3.selectAll(".donutsvg").remove();
 							drawDonut('#stateALdonut',alcoholPerc,120,120,".35em");
 							drawDonut('#stateSPdonut',speedingPerc,120,120,".35em");
-							drawDonut('#nationALdonut',alcoholPerc,120,120,".35em");
-							drawDonut('#nationSPdonut',speedingPerc,120,120,".35em");
+							
+						}
+						
+						if(d["ID"]=="9999"){
+							var N_alcoholPerc = parseInt(d[year+"AL"]);
+							var N_totalFatal = parseInt(d["FT"+year]);
+							var N_speedFatal = parseInt(d["SF"+year]);
+							var N_speedingPerc = (N_speedFatal/N_totalFatal)*100;
+							drawDonut('#nationALdonut',N_alcoholPerc,120,120,".35em");
+							drawDonut('#nationSPdonut',N_speedingPerc,120,120,".35em");
 						}
 				 	})
 				});

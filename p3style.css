@@ -87,11 +87,20 @@ text {
 
 #zipper{  
   vertical-align: top;
-  padding: 50px 0 50px 0px;
+  padding: 10px 0 50px 0px;
   height: 200px;
   width: 400px;
   margin: 0 auto;
 }
+
+#zipper2{  
+  vertical-align: top;
+  padding: 10px 0 50px 0px;
+  height: 200px;
+  width: 400px;
+  margin: 0 auto;
+}
+
 
 #lineChart {
   float: left;
@@ -236,3 +245,4 @@ path.color1 {
 #histogram {
   padding-top: 60px;
 }
+
