@@ -56,7 +56,7 @@
 		</div>
 
 		<div class="col-md-4 ">		
-			<h2 ><span id="lineTitle" class="center"></span> in <span id="zipperYear">2004</span>: </h2>
+			<h2>Alcohol or Speeding related Fatalities Percentage in <br> <span id="lineTitle"></span> in <span id="zipperYear">2004</span>: </h2>
 			<div id="zipper" >
 		    	<div class="Alcohol">
 		       		<div class="title_text">Alcohol</div>
@@ -249,6 +249,34 @@
 			document.getElementById("zipperYear2").innerHTML = year;
 			fatalArr=[];
 			var paint;
+			
+			d3.csv("./data/alcohol_speedings.csv", function (error, data2){
+					if (error) {console.log(error);}
+					// var selected = d3.select(this);
+					data2.forEach(function (d){
+						//console.log(d);
+						if(d["ID"]==clickedId){
+							var alcoholPerc = parseInt(d[year+"AL"]);
+							var totalFatal = parseInt(d["FT"+year]);
+							var speedFatal = parseInt(d["SF"+year]);
+							var speedingPerc = (speedFatal/totalFatal)*100;
+							
+							d3.selectAll(".donutsvg").remove();
+							drawDonut('#stateALdonut',alcoholPerc,120,120,".35em");
+							drawDonut('#stateSPdonut',speedingPerc,120,120,".35em");
+							
+						}
+						
+						if(d["ID"]=="9999"){
+							var N_alcoholPerc = parseInt(d[year+"AL"]);
+							var N_totalFatal = parseInt(d["FT"+year]);
+							var N_speedFatal = parseInt(d["SF"+year]);
+							var N_speedingPerc = (N_speedFatal/N_totalFatal)*100;
+							drawDonut('#nationALdonut',N_alcoholPerc,120,120,".35em");
+							drawDonut('#nationSPdonut',N_speedingPerc,120,120,".35em");
+						}
+				 	})
+				});
 			
 			// change the fill of map 
 			d3.csv("./data/data.csv", function (error, data){
