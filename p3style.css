@@ -244,6 +244,8 @@ path.color1 {
 #container {
   margin:2%;
   padding:20px;
+  margin-top:0;
+  padding-top:0;
 }
 
 #legendSvg {
