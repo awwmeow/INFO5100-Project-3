@@ -20,10 +20,12 @@
 
 <body onload="sizeChange()">
 	<h1> Which State Has the Worst Drivers? </h1>
-	<p class="center"> ------description goes here------ </br></p> 
+	<div class="center des">
+		<p class="center"> Road traffic safety is one of the major concern in the world. The road collision problem is acute since the number of victims are overwhelming and the situation is severe. Since the USA is the country on the wheels, what is the situation here? Let't take a look at the Highway Accident Fatal Rate from 2004 to 2014</br></p> 
+	</div>
 
 	<div class="row">
-		<div class="col-md-8 center" >
+		<div class="col-md-7 center" >
 			<h2> Highway Accident Fatal Rate by States in <span id="yearSpan1"> 2004 </span></h2>
 			<div id="map"> 
 				<svg id="container"></svg>
@@ -40,8 +42,8 @@
 		</br>
 		</div>
 
-		<div class="col-md-4 no-wrap">
-			<h2 > Top 10 States with Highest <br> Highway Fatal Rate in <span id="yearSpan2">2004</span></h2>
+		<div class="col-md-5 no-wrap">
+			<h3 > Top 10 States with Highest <br> Highway Fatal Rate in <span id="yearSpan2">2004</span></h3>
 			<div id="histogram" class="center"></div>
 		</div>
 	</div>
@@ -56,7 +58,7 @@
 		</div>
 
 		<div class="col-md-4 ">		
-			<h2>Alcohol or Speeding related Fatalities Percentage in <br> <span id="lineTitle"></span> in <span id="zipperYear">2004</span>: </h2>
+			<h3>Alcohol or Speeding related Fatalities Percentage in <br> <span id="lineTitle"></span> in <span id="zipperYear">2004</span>: </h3>
 			<div id="zipper" >
 		    	<div class="Alcohol">
 		       		<p class="title_text">Alcohol</p>
@@ -68,7 +70,7 @@
 		   		</div>
 			</div>
 			
-			<h2>USA in <span id="zipperYear2">2004</span>:</h2>
+			<h3>USA in <span id="zipperYear2">2004</span>:</h3>
 			<div id="zipper2">
 		    	<div class="Alcohol">
 		       		<p class="title_text">Alcohol</p>
@@ -384,12 +386,12 @@
 		$("#lineSvg").empty();
 		$("#lineLegend").empty();
 		d3.selectAll(".lineCheckBox").style("opacity", "1");		
-		var height = 300;
+		var height = 400;
 		var width = $ ("#lineWrapper").width();
 		var padding = 0.06*width;
 		var linesvg = d3.select("#lineSvg").append("svg")
 		.attr("height", height).attr("width", width);
-		$("#lineWrapper").height(400);
+		$("#lineWrapper").height(600);
 		var legendsvg = d3.select("#lineLegend").append("svg")
 		.attr("height", 50).attr("width", width);
 
@@ -398,12 +400,12 @@
 		var lineColors = ["#FFCA28","#FF6F00",  "#7986CB", "#3949AB"];
 
 		for (var i=0; i<4; i++){
-			legendsvg.append("circle").attr("cx", 0.1*width+i*0.2*width).attr("cy",0.1*height)
+			legendsvg.append("circle").attr("cx", 0.1*width+i*0.2*width).attr("cy",0.1*height-7)
 			.attr("r",radius).style("fill",lineColors[i]);
 			legendsvg.append("text").text(circleText[i])
-			.attr("x",0.1*width+i*0.2*width+15).attr("y",0.1*height+5);
+			.attr("x",0.1*width+i*0.2*width+15).attr("y",0.1*height-2);
 		}
-
+		
 		 // Add the clip path.
 	  	linesvg.append("clipPath")
 	    .attr("id", "clip")

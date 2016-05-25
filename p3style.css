@@ -22,8 +22,24 @@ h2 {
   text-align: center;
 }
 
+h3 {
+  color: #2CA4B0;
+  font-family: 'Oleo Script', cursive;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 32px;
+  /*margin: 20px;*/
+  /*padding-left: 20px;*/
+  text-shadow: 1px 0 0 #fff;
+  text-align: center;
+}
+
 .no-wrap {
   white-space: nowrap;
+}
+
+.center{
+  text-align: center;
 }
 
 p {
@@ -34,12 +50,13 @@ p {
   margin: 0 0 24px;
 }
 
-body {
-  background-color: #FAF9F5;
+.des {
+  width: 1000px;
+  margin: auto;
 }
 
-.center{
-  text-align: center;
+body {
+  background-color: #FAF9F5;
 }
 
 #states {
@@ -244,5 +261,6 @@ path.color1 {
 
 #histogram {
   padding-top: 30px;
+  margin: auto;
 }
 
