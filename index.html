@@ -396,6 +396,17 @@
 		var legendsvg = d3.select("#lineLegend").append("svg")
 		.attr("height", 50).attr("width", width);
 
+		linesvg.append("text").text("Fatalities Rate Per 100 Million Vehicle Miles Traveled")
+		.attr("x",20)
+		.attr("y",height-25)
+		.style("fill","#FFA000");
+		
+		linesvg.append("text").text("Murder Rate/ Unemployment Rate in Percentage")
+		.attr("x",width-300)
+		.attr("y",height-25)
+		.style("fill","#9FA8DA");
+		
+		
 		var radius = 0.01*width;
 		var circleText = ["US Average Fatal Rate", "State Fatal Rate", "State Murder Rate", "State unemployment Rate"];
 		var lineColors = ["#FFCA28","#FF6F00",  "#7986CB", "#3949AB"];
